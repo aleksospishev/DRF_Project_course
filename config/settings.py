@@ -135,7 +135,7 @@ CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60
 CELERY_BEAT_SCHEDULE = {
     "user_block": {
-        "task": "users.tasks.disactive_user",
+        "task": "habits.tasks.send_habit",
         "schedule": timedelta(minutes=10),
     },
 }
