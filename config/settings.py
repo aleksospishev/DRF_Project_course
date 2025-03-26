@@ -14,7 +14,8 @@ SECRET_KEY = os.getenv("SECRET_KEY", default="None")
 
 DEBUG = True if os.getenv("DEBUG") == "True" else False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [ '127.0.0.1', 'localhost']
+
 INSTALLED_APPS = [
     "rest_framework",
     "django.contrib.admin",
@@ -144,7 +145,6 @@ TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 
 
 if "test" in sys.argv:
-    print("Args:", sys.argv)
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
