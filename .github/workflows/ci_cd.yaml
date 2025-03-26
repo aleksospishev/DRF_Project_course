@@ -92,8 +92,8 @@ jobs:
       - name: Deploy to Server
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.HOST }} << 'EOF'
-            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/drf_sky:latest
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/habits_project:latest
             sudo docker stop web || true
             sudo docker rm web || true
-            sudo docker run -d --name web -p 80:8000 ${{ secrets.USERNAME }}/drf_sky:latest
+            sudo docker run -d --name web -p 80:8000 ${{ secrets.USERNAME }}/habits_project:latest
           EOF
