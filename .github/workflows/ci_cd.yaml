@@ -4,7 +4,7 @@ name: Django-app workflow
 on: [push, pull_request]
 
 jobs:
-  tests:
+  lint_tests:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -24,7 +24,7 @@ jobs:
         python -m flake8
 
   test:
-    needs: tests
+    needs: lint_tests
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
