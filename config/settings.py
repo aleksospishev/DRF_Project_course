@@ -69,7 +69,7 @@ DATABASES = {
         "USER": os.getenv("USER_BD"),
         "PASSWORD": os.getenv("PASS_BD"),
         "PORT": os.getenv("PORT"),
-        "HOST": os.getenv("HOST"),
+        "HOST_BD": os.getenv("HOST_BD"),
     }
 }
 
@@ -140,3 +140,13 @@ CELERY_BEAT_SCHEDULE = {
     },
 }
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
+
+
+if "test" in sys.argv:
+    print("Args:", sys.argv)
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "test_db.sqlite3",
+        }
+    }
