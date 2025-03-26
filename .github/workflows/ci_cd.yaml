@@ -116,8 +116,8 @@ jobs:
             echo TELEGRAM_TOKEN =${{ secrets.TELEGRAM_TOKEN}} >> .env
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/habits_project:latest
             sudo docker compose stop
-            sudo docker compose rm web
+            sudo docker compose rm habits_project
             sudo docker compose up -d
-            sudo docker compose exec -T web python manage.py migrate
-            sudo docker compose exec -T web python manage.py collectstatic --no-input
+            sudo docker compose exec -T habits_project python manage.py migrate
+            sudo docker compose exec -T habits_project python manage.py collectstatic --no-input
 #          EOF
