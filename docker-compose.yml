@@ -10,8 +10,8 @@ services:
     image: aleksospishev/habits_project:latest
     restart: always
     volumes:
-      - static_value:/app/static/
-      - media_value:/app/media/
+      - .:/app
+      - static_volume:/app/staticfiles
     env_file:
       - ./.env
     depends_on:
