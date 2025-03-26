@@ -3,20 +3,20 @@
 Это бэкенд-часть SPA веб-приложения, разработанное на DRF, которое способствует приобретению новых полезных привычек и искоренению старых плохих привычек.
 
 Установка, настройка и запуск:
-клонировать проект git@github.com:aleksospishev/DRF_Project_course.git
+подготовить сервер к развертыванию проекта, установить docker, docker compose
+на сервер клонировать проект git@github.com:aleksospishev/DRF_Project_course.git
 
+заполнить файл .env по примеру env_example
 
-для работы по образцу из env_example создать в корне файл   .env
+скачать актуальную версию докер-образа проекта
+"""sudo docker pull aleksospishev/habits_project:latest"""
 
-утанновить зависимости 
-pip install -r requirements.txt
+запустить проект
+"""sudo docker compose up -d"""
 
-Запуск проекта
-Примените миграции python3 manage.py migrate.
+установить миграции 
+"""sudo docker compose exec -T web python manage.py migrate"""
 
-Запусr локальный серверf командой python3 manage.py runserver.
-
-Запустите брокер сообщений redis-server
-
-Запустите celery celery -A config worker --beat --scheduler django --loglevel=info
+запустить
+"""sudo docker compose exec -T web python manage.py runserver"""
 
