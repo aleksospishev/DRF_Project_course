@@ -14,7 +14,7 @@ SECRET_KEY = os.getenv("SECRET_KEY", default="None")
 
 DEBUG = True if os.getenv("DEBUG") == "True" else False
 
-ALLOWED_HOSTS = [ '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     "rest_framework",
