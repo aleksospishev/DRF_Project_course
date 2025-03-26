@@ -103,6 +103,7 @@ jobs:
             cd DRF_Project_course
             touch .env
             echo "SECRET_KEY =${{ secrets.SECRET_KEY }}" >> .env
+            echo "DEBUG = ${{ secrets.DEBUG }}" >> .env
             echo NAME=${{ secrets.NAME }} >> .env
             echo USER_BD=${{ secrets.USER_BD }} >> .env
             echo PASS_BD=${{ secrets.PASS_BD }} >> .env
