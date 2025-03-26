@@ -1,5 +1,5 @@
 services:
-  web:
+  habits_project:
     image: aleksospishev/habits_project:latest
     container_name: habits_project
     command:  ./wait-for-it.sh postgres_db:5432 -- python manage.py runserver 0.0.0.0:8000
@@ -23,7 +23,7 @@ services:
       - ./nginx.conf/nginx.conf.conf:/etc/nginx.conf/nginx.conf.conf
       - static_volume:/app/staticfiles
     depends_on:
-      - web
+      - habits_project
 
   celery:
     build:
