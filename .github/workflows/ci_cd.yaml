@@ -101,6 +101,7 @@ jobs:
 #          PASSPHRASE: ${{ secrets.PASSPHRASE }}
           script: |
             cd DRF_Project_course
+            rm .env
             touch .env
             echo "SECRET_KEY =${{ secrets.SECRET_KEY }}" >> .env
             echo "DEBUG = ${{ secrets.DEBUG }}" >> .env
