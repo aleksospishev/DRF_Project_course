@@ -70,8 +70,29 @@ jobs:
       - test
       - build_and_push_to_docker_hub_backend
     steps:
-      - name: create .env
+#      - name: create .env
+#        run: |
+#            touch .env
+#            echo "SECRET_KEY =${{ secrets.SECRET_KEY }}" >> .env
+#            echo NAME=${{ secrets.NAME }} >> .env
+#            echo USER_BD=${{ secrets.USER_BD }} >> .env
+#            echo PASS_BD=${{ secrets.PASS_BD }} >> .env
+#            echo HOST_BD=${{ secrets.HOST_BD }} >> .env
+#            echo PORT=${{ secrets.PORT }} >> .env
+#            echo STRIPE_API_KEY =${{ secrets.STRIPE_API_KEY }} >> .env
+#            echo E_MAIL =${{ secrets.EMAIL }} >> .env
+#            echo PASS_MAIL =${{ secrets.PASS_MAIL}} >> .env
+#            echo TELEGRAM_TOKEN =${{ secrets.TELEGRAM_TOKEN}} >> .env
+
+      - name: Set up SSH key
+        uses: webfactory/ssh-agent@v0.9.1
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Deploy to Server
         run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.HOST }} << 'EOF'
+            cd DRF_Project_course
             touch .env
             echo "SECRET_KEY =${{ secrets.SECRET_KEY }}" >> .env
             echo NAME=${{ secrets.NAME }} >> .env
@@ -84,14 +105,6 @@ jobs:
             echo PASS_MAIL =${{ secrets.PASS_MAIL}} >> .env
             echo TELEGRAM_TOKEN =${{ secrets.TELEGRAM_TOKEN}} >> .env
 
-      - name: Set up SSH key
-        uses: webfactory/ssh-agent@v0.9.1
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      - name: Deploy to Server
-        run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.HOST }} << 'EOF'
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/habits_project:latest
             sudo docker compose stop
             sudo docker compose rm web
