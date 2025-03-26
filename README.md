@@ -23,4 +23,3 @@ POSTGRES_PASSWORD       - пароль от базы данных
 DB_HOST                 - db
 DB_PORT                 - 5432 (порт по умолчанию)
 
-ntcn
