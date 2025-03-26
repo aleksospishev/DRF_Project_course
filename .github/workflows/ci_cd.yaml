@@ -92,9 +92,9 @@ jobs:
 #      - name: Deploy to Server
 #        run: |
 #          ssh -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.HOST }} << 'EOF'
-      -name: executing remote ssh commands to deploy
-      uses: appleboy/ssh-action@master
-      with:
+      - name: executing remote ssh commands to deploy
+        uses: appleboy/ssh-action@master
+        with:
           HOST: ${{ secrets.HOST }}
           USERNAME: ${{ secrets.USERNAME }}
           KEY: ${{ secrets.SSH_PRIVATE_KEY }}
