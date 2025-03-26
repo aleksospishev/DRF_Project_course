@@ -2,7 +2,7 @@ services:
   web:
     image: aleksospishev/habits_project:latest
     container_name: habits_project
-    command: python manage.py runserver 0.0.0.0:8000
+    command:  ./wait-for-it.sh postgres_db:5432 -- python manage.py runserver 0.0.0.0:8000
     ports:
       - "8000:8000"
     env_file:
