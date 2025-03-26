@@ -83,15 +83,23 @@ jobs:
 #            echo E_MAIL =${{ secrets.EMAIL }} >> .env
 #            echo PASS_MAIL =${{ secrets.PASS_MAIL}} >> .env
 #            echo TELEGRAM_TOKEN =${{ secrets.TELEGRAM_TOKEN}} >> .env
-
-      - name: Set up SSH key
-        uses: webfactory/ssh-agent@v0.9.1
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      - name: Deploy to Server
-        run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.HOST }} << 'EOF'
+#
+#      - name: Set up SSH key
+#        uses: webfactory/ssh-agent@v0.9.1
+#        with:
+#          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+#
+#      - name: Deploy to Server
+#        run: |
+#          ssh -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.HOST }} << 'EOF'
+      -name: executing remote ssh commands to deploy
+      uses: appleboy/ssh-action@master
+      with:
+          HOST: ${{ secrets.HOST }}
+          USERNAME: ${{ secrets.USERNAME }}
+          KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+#          PASSPHRASE: ${{ secrets.PASSPHRASE }}
+          script: |
             cd DRF_Project_course
             touch .env
             echo "SECRET_KEY =${{ secrets.SECRET_KEY }}" >> .env
@@ -109,5 +117,5 @@ jobs:
             sudo docker compose rm web
             sudo docker compose up -d
             sudo docker compose exec -T web python manage.py migrate
-            sudo docker compose exec -T web python manage.py collectstatic --no-inputs
-          EOF
+            sudo docker compose exec -T web python manage.py collectstatic --no-input
+#          EOF
