@@ -78,7 +78,7 @@ jobs:
           KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd DRF_Project_course
-            sudo rm .env
+            rm .env
             touch .env
             echo "SECRET_KEY =${{ secrets.SECRET_KEY }}" >> .env
             echo "DEBUG = ${{ secrets.DEBUG }}" >> .env
