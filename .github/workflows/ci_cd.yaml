@@ -93,7 +93,9 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.HOST }} << 'EOF'
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/habits_project:latest
-            sudo docker stop web || true
-            sudo docker rm web || true
-            sudo docker run -d --name web -p 80:8000 ${{ secrets.USERNAME }}/habits_project:latest
+            sudo docker compose stop
+            sudo docker compose rm web
+            sudo docker compose up -d
+            sudo docker compose exec -t web python manage.py migrate
+            sudo docker compose exec -t web python manage.py collectstatic --no-inputs
           EOF
