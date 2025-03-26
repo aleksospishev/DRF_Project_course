@@ -66,7 +66,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs:
-      - tests
+      - lint_tests
+      - test
       - build_and_push_to_docker_hub_backend
     steps:
       - name: create .env
