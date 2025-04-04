@@ -1,22 +1,26 @@
-Трекер полезных привычек
-Описание:
-Это бэкенд-часть SPA веб-приложения, разработанное на DRF, которое способствует приобретению новых полезных привычек и искоренению старых плохих привычек.
+Для Развертывания на сервере потребуется
 
-Установка, настройка и запуск:
-подготовить сервер к развертыванию проекта, установить docker, docker compose
-на сервер клонировать проект git@github.com:aleksospishev/DRF_Project_course.git
+** клонироват репозиторий с GitHub:**
 
-заполнить файл .env по примеру env_example
+git@github.com:aleksospishev/drf_sky.git
+Установить на сервере Docker, Docker Compose:
 
-скачать актуальную версию докер-образа проекта
-"""sudo docker pull aleksospishev/habits_project:latest"""
 
-запустить проект
-"""sudo docker compose up -d"""
+```
 
-установить миграции 
-"""sudo docker compose exec -T web python manage.py migrate"""
+Для работы с GitHub Actions необходимо в репозитории в разделе Secrets > Actions создать переменные окружения:
 
-запустить
-"""sudo docker compose exec -T web python manage.py runserver"""
+SECRET_KEY              - секретный ключ Django проекта
+DOCKER_PASSWORD         - пароль от Docker Hub
+DOCKER_USERNAME         - логин Docker Hub
+HOST                    - публичный IP сервера
+USER                    - имя пользователя на сервере
+PASSPHRASE              - *если ssh-ключ защищен паролем
+SSH_KEY                 - приватный ssh-ключ
+DB_NAME                 - имя базы данных
+POSTGRES_USER           - пользователь базы данных
+POSTGRES_PASSWORD       - пароль от базы данных
+DB_HOST                 - db
+DB_PORT                 - 5432 (порт по умолчанию)
+
 
