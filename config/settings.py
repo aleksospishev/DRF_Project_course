@@ -1,6 +1,7 @@
 import os
 from datetime import timedelta
 from pathlib import Path
+import sys
 
 from dotenv import load_dotenv
 
@@ -11,9 +12,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv("SECRET_KEY", default="None")
 
-DEBUG = True if os.getenv("DEBUG") == "True" else False
+DEBUG = True if os.getenv("DEBUG") == "True"  else False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
 INSTALLED_APPS = [
     "rest_framework",
     "django.contrib.admin",
@@ -65,11 +67,11 @@ WSGI_APPLICATION = "config.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": os.getenv("NAME"),
-        "USER": os.getenv("USER_BD"),
-        "PASSWORD": os.getenv("PASS_BD"),
+        "NAME": os.getenv("POSTGRES_DB"),
+        "USER": os.getenv("POSTGRES_USER"),
+        "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
         "PORT": os.getenv("PORT"),
-        "HOST": os.getenv("HOST"),
+        "HOST": os.getenv("POSTGRES_HOST", "localhost"),
     }
 }
 
@@ -101,8 +103,10 @@ USE_TZ = True
 STATIC_URL = "static/"
 
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    BASE_DIR / "static"
 ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = "media/"
 
@@ -140,3 +144,12 @@ CELERY_BEAT_SCHEDULE = {
     },
 }
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
+
+
+if "test" in sys.argv:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "test_db.sqlite3",
+        }
+    }
