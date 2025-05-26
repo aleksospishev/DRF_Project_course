@@ -123,9 +123,9 @@ docker-compose exec web pytest --cov
 
 - Документация к API
 
-Автор
-Александр Оспищев — Python-разработчик
-aleksospishev@gmail.com
+Автор  
+Александр Оспищев — Python-разработчик  
+aleksospishev@gmail.com  
 GitHub: aleksospishev
 
 
